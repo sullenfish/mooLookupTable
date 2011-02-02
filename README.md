@@ -1,4 +1,4 @@
-## mooLookupTable
+# mooLookupTable
 #### for MooTools 1.3
 MooLookupTable is a MooTools Class for transforming generic table elements into lookup tables, all in client-side JavaScript.
 
