@@ -31,11 +31,14 @@ var MooLookupTable = new Class({
             primaryRow = this.table.getElements('tbody tr td:nth-child(' + (primaryColumn + 1) + ')').map(function(item) {
                 return item.get('text');
             }).indexOf(primaryKeyValue);
+        if (primaryRow < 0) return null; // primary key value not found
         keys.each(function(key) {
             var keyColumn = this.table.getElements('thead ^ tr th').map(function(item) {
                 return item.get('text');
             }).indexOf(key);
-            values.push(this.table.getElement('tbody tr:nth-child(' + (primaryRow + 1) + ') td:nth-child(' + (keyColumn + 1) + ')').get('text'));
+            if (keyColumn >= 0){ // key column was found
+            	values.push(this.table.getElement('tbody tr:nth-child(' + (primaryRow + 1) + ') td:nth-child(' + (keyColumn + 1) + ')').get('text'));
+            }
         }, this);
         return values;
     }
