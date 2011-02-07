@@ -11,7 +11,14 @@ var MooLookupTable = new Class({
     	this.setOptions(options);
         // set table
         if (table) {
-            this.table = table;
+        	if (typeOf(table) == 'string' || typeOf(table) == 'textnode'){
+        		this.table = document.id(table);
+        		if (!this.table){
+        			return false;
+        		}
+        	} else {
+            	this.table = table;
+            }
         } else {
             return false;
         }
