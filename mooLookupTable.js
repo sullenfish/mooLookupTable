@@ -1,5 +1,15 @@
 var MooLookupTable = new Class({
-    initialize: function(table, primaryKey) {
+	Implements: [Options],
+	options: {
+		output: 'text'
+	},
+    initialize: function(table, primaryKey, options) {
+    	if (arguments.length == 2 && typeOf(primaryKey) == 'object'){
+    		options = primaryKey;
+    		primaryKey = null;
+    	}
+    	this.setOptions(options);
+        // set table
         if (table) {
             this.table = table;
         } else {
@@ -18,8 +28,11 @@ var MooLookupTable = new Class({
             primaryKey = pk ? pk.get('text') : null;
         }
         this.primaryKey = primaryKey ? primaryKey : this.table.getElement('th').get('text');
+        // set default output type
+        this.output = (this.options.output == 'text' || this.options.output == 'html') ? this.options.output : 'text';
     },
-    lookup: function(primaryKeyValue, keys) {
+    lookup: function(primaryKeyValue, keys, output) {
+    	var output = output ? ((output == 'text' || output == 'html') ? output : this.output) : this.output;
         if (!primaryKeyValue || !keys) {
             return null;
         }
@@ -37,7 +50,7 @@ var MooLookupTable = new Class({
                 return item.get('text');
             }).indexOf(key);
             if (keyColumn >= 0){ // key column was found
-            	values.push(this.table.getElement('tbody tr:nth-child(' + (primaryRow + 1) + ') td:nth-child(' + (keyColumn + 1) + ')').get('text'));
+            	values.push(this.table.getElement('tbody tr:nth-child(' + (primaryRow + 1) + ') td:nth-child(' + (keyColumn + 1) + ')').get(output));
             }
         }, this);
         return values;
