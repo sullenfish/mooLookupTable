@@ -1,3 +1,25 @@
+/*
+---
+
+name: MooLookupTable
+
+description: Query table elements like flat file databases, client-side. Return text or html.
+
+license: MIT-style license.
+
+copyright: Copyright (c) 2011 [Frederick J. Ostrander](http://sullenfish.com/).
+
+authors: Frederick J. Ostrander (http://sullenfish.com/)
+
+requires:
+	-	Core
+	-	/MooLookupTable
+
+provides: [MooLookupTable]
+
+...
+*/
+
 var MooLookupTable = new Class({
 	Implements: [Options],
 	options: {
