@@ -23,6 +23,7 @@ provides: [MooLookupTable]
 var MooLookupTable = new Class({
 	Implements: [Options],
 	options: {
+		'case-sensitive': false,
 		output: 'text'
 	},
     initialize: function(table, primaryKey, options) {
@@ -59,6 +60,8 @@ var MooLookupTable = new Class({
         this.primaryKey = primaryKey ? primaryKey : this.table.getElement('th').get('text');
         // set default output type
         this.output = (this.options.output == 'text' || this.options.output == 'html') ? this.options.output : 'text';
+        // set case sensitivity
+        this.caseSensitive = this.options['case-sensitive'];
     },
     lookup: function(primaryKeyValue, keys, output) {
     	var output = output ? ((output == 'text' || output == 'html') ? output : this.output) : this.output;
@@ -68,16 +71,16 @@ var MooLookupTable = new Class({
         keys = Array.from(keys);
         var values = [],
             primaryColumn = this.table.getElements('thead ^ tr th').map(function(item) {
-                return item.get('text');
-            }).indexOf(this.primaryKey),
+                return this.caseSensitive ? item.get('text') : item.get('text').toLowerCase();
+            }).indexOf(this.caseSensitive ? this.primaryKey : this.primaryKey.toLowerCase()),
             primaryRow = this.table.getElements('tbody tr td:nth-child(' + (primaryColumn + 1) + ')').map(function(item) {
-                return item.get('text');
-            }).indexOf(primaryKeyValue);
+                return this.caseSensitive ? item.get('text') : item.get('text').toLowerCase();
+            }).indexOf(this.caseSensitive ? primaryKeyValue : primaryKeyValue.toLowerCase());
         if (primaryRow < 0) return null; // primary key value not found
         keys.each(function(key) {
             var keyColumn = this.table.getElements('thead ^ tr th').map(function(item) {
-                return item.get('text');
-            }).indexOf(key);
+                return this.caseSensitive ? item.get('text') : item.get('text').toLowerCase();
+            }).indexOf(this.caseSensitive ? key : key.toLowerCase());
             if (keyColumn >= 0){ // key column was found
             	values.push(this.table.getElement('tbody tr:nth-child(' + (primaryRow + 1) + ') td:nth-child(' + (keyColumn + 1) + ')').get(output));
             }
