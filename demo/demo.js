@@ -1,6 +1,3 @@
-// pre-work -- grab results <div> for test output
-var results = document.id('results');
-
 // define lookup table class
 var MooLookupTable = new Class({
 	Implements: [Options],
@@ -71,8 +68,13 @@ var MooLookupTable = new Class({
     }
 });
 
-// instantiate new lookup table using <table> sitting in dom
-var myMLT = new MooLookupTable(document.id('lookup'),{output:'html'});
-
-// post-work -- lookup something and display the results
-results.set('text', myMLT.lookup('sub', 'subtopic'));
+window.addEvent('domready', function(){
+	// pre-work -- grab results <div> for test output
+	var results = document.id('results');
+	
+	// instantiate new lookup table using <table> sitting in dom
+	var myMLT = new MooLookupTable(document.id('lookup'),{output:'html'});
+	
+	// post-work -- lookup something and display the results
+	results.set('text', myMLT.lookup('sub', 'subtopic'));
+});
