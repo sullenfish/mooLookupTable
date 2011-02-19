@@ -1,0 +1,22 @@
+* {
+    font-family: arial, helvetica, sans-serif;
+}
+div, table, td, th {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+th {
+    background-color: darkgray;
+    border: 3px solid black;
+    color: white;
+    font-size: 1.15em;
+    font-weight: bold;
+}
+
+th.primary-key {
+    background-color: black;
+}
+.bold {
+    font-weight: bold;
+}
