@@ -10,6 +10,7 @@ Live demo at [jsFiddle.net](http://jsfiddle.net/gh/get/mootools/1.3/sullenfish/m
 
 History
 -------
+- 0.2.2 Tweaked demo to include case-insensitive lookup.
 - 0.2.1 Demo at jsFiddle.net.
 - 0.2.0 Case-sensitivity added to options (set to 'false' by default).
 - 0.1.0 First release.

@@ -76,5 +76,5 @@ window.addEvent('domready', function(){
 	var myMLT = new MooLookupTable(document.id('lookup'),{output:'html'});
 	
 	// post-work -- lookup something and display the results
-	results.set('text', myMLT.lookup('sub', 'subtopic'));
+	results.set('text', myMLT.lookup('SUB', 'SUBtopic'));
 });
